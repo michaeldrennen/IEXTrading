@@ -74,6 +74,12 @@ class IEXTrading {
         return new StockQuote( $response );
     }
 
+    /**
+     * @param $ticker
+     * @return \DPRMC\IEXTrading\Responses\StockCompany
+     * @throws \DPRMC\IEXTrading\Exceptions\UnknownSymbol
+     * @throws \Exception
+     */
     public static function stockCompany( $ticker ) {
         $uri      = 'stock/' . $ticker . '/company';
         $response = IEXTrading::makeRequest( 'GET', $uri );
@@ -81,6 +87,12 @@ class IEXTrading {
         return new StockCompany( $response );
     }
 
+    /**
+     * @param $ticker
+     * @return \DPRMC\IEXTrading\Responses\StockPeers
+     * @throws \DPRMC\IEXTrading\Exceptions\UnknownSymbol
+     * @throws \Exception
+     */
     public static function stockPeers( $ticker ) {
         $uri      = 'stock/' . $ticker . '/peers';
         $response = IEXTrading::makeRequest( 'GET', $uri );
@@ -88,6 +100,12 @@ class IEXTrading {
         return new StockPeers( $response );
     }
 
+    /**
+     * @param $ticker
+     * @return \DPRMC\IEXTrading\Responses\StockRelevant
+     * @throws \DPRMC\IEXTrading\Exceptions\UnknownSymbol
+     * @throws \Exception
+     */
     public static function stockRelevant( $ticker ) {
         $uri      = 'stock/' . $ticker . '/relevant';
         $response = IEXTrading::makeRequest( 'GET', $uri );
@@ -133,6 +151,12 @@ class IEXTrading {
         return new StockChart( $response, $option, $date );
     }
 
+    /**
+     * @param $ticker
+     * @return \DPRMC\IEXTrading\Responses\StockFinancials
+     * @throws \DPRMC\IEXTrading\Exceptions\UnknownSymbol
+     * @throws \Exception
+     */
     public static function stockFinancials( $ticker ) {
         $uri      = 'stock/' . $ticker . '/financials';
         $response = IEXTrading::makeRequest( 'GET', $uri );
@@ -140,6 +164,12 @@ class IEXTrading {
         return new StockFinancials( $response );
     }
 
+    /**
+     * @param $ticker
+     * @return \DPRMC\IEXTrading\Responses\StockLogo
+     * @throws \DPRMC\IEXTrading\Exceptions\UnknownSymbol
+     * @throws \Exception
+     */
     public static function stockLogo( $ticker ) {
         $uri      = 'stock/' . $ticker . '/logo';
         $response = IEXTrading::makeRequest( 'GET', $uri );
@@ -147,6 +177,12 @@ class IEXTrading {
         return new StockLogo( $response );
     }
 
+    /**
+     * @param $ticker
+     * @return float
+     * @throws \DPRMC\IEXTrading\Exceptions\UnknownSymbol
+     * @throws \Exception
+     */
     public static function stockPrice( $ticker ) {
         $uri        = 'stock/' . $ticker . '/price';
         $response   = IEXTrading::makeRequest( 'GET', $uri );
