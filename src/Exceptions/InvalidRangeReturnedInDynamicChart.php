@@ -1,6 +1,6 @@
 <?php
 
-namespace DPRMC\IEXTrading\Exceptions;
+namespace MichaelDrennen\IEXTrading\Exceptions;
 
 class InvalidRangeReturnedInDynamicChart extends IEXTradingException {
 

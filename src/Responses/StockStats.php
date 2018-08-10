@@ -1,6 +1,6 @@
 <?php
 
-namespace DPRMC\IEXTrading\Responses;
+namespace MichaelDrennen\IEXTrading\Responses;
 
 class StockStats extends IEXTradingResponse {
     public $companyName;

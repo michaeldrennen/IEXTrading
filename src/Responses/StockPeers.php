@@ -1,12 +1,12 @@
 <?php
 
-namespace DPRMC\IEXTrading\Responses;
+namespace MichaelDrennen\IEXTrading\Responses;
 
 /**
  * Class StockPeers
  * An array of peer tickers as defined by IEX. This is not intended to represent a definitive or accurate list of
  * peers, and is subject to change at any time.
- * @package DPRMC\IEXTrading\Responses
+ * @package MichaelDrennen\IEXTrading\Responses
  * @link    https://iextrading.com/developer/docs/#peers
  */
 class StockPeers extends IEXTradingResponse {

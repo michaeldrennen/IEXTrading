@@ -1,9 +1,9 @@
 <?php
 
-namespace DPRMC\IEXTrading\Responses;
+namespace MichaelDrennen\IEXTrading\Responses;
 
-use DPRMC\IEXTrading\Exceptions\InvalidRangeReturnedInDynamicChart;
-use DPRMC\IEXTrading\Exceptions\InvalidStockChartOption;
+use MichaelDrennen\IEXTrading\Exceptions\InvalidRangeReturnedInDynamicChart;
+use MichaelDrennen\IEXTrading\Exceptions\InvalidStockChartOption;
 use Illuminate\Support\Collection;
 
 class StockChart extends IEXTradingResponse {
@@ -36,8 +36,8 @@ class StockChart extends IEXTradingResponse {
      * @param      $option
      * @param null $date
      *
-     * @throws \DPRMC\IEXTrading\Exceptions\InvalidRangeReturnedInDynamicChart
-     * @throws \DPRMC\IEXTrading\Exceptions\InvalidStockChartOption
+     * @throws \MichaelDrennen\IEXTrading\Exceptions\InvalidRangeReturnedInDynamicChart
+     * @throws \MichaelDrennen\IEXTrading\Exceptions\InvalidStockChartOption
      */
     public function __construct( $response, $option, $date = null ) {
         $this->option = $option;

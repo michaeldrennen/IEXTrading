@@ -1,6 +1,6 @@
 <?php
 
-namespace DPRMC\IEXTrading\Responses;
+namespace MichaelDrennen\IEXTrading\Responses;
 
 
 class StockFinancials extends IEXTradingResponse {
