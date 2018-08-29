@@ -18,10 +18,10 @@ abstract class StockChartData {
      */
     public function __construct( $dataPoint ) {
 
-        $this->high           = $dataPoint[ 'high' ];
-        $this->low            = $dataPoint[ 'low' ];
-        $this->volume         = $dataPoint[ 'volume' ];
-        $this->changeOverTime = $dataPoint[ 'changeOverTime' ];
+        $this->high           = $dataPoint[ 'high' ] ?? NULL;
+        $this->low            = $dataPoint[ 'low' ] ?? NULL;
+        $this->volume         = $dataPoint[ 'volume' ] ?? NULL;
+        $this->changeOverTime = $dataPoint[ 'changeOverTime' ] ?? NULL;
     }
 
 }
