@@ -31,26 +31,26 @@ class StockFinancialReport {
 
 
     public function __construct( $data ) {
-        $this->reportDate             = $data[ 'reportDate' ];
-        $this->grossProfit            = $data[ 'grossProfit' ];
-        $this->costOfRevenue          = $data[ 'costOfRevenue' ];
-        $this->operatingRevenue       = $data[ 'operatingRevenue' ];
-        $this->totalRevenue           = $data[ 'totalRevenue' ];
-        $this->operatingIncome        = $data[ 'operatingIncome' ];
-        $this->netIncome              = $data[ 'netIncome' ];
-        $this->researchAndDevelopment = $data[ 'researchAndDevelopment' ];
-        $this->operatingExpense       = $data[ 'operatingExpense' ];
-        $this->currentAssets          = $data[ 'currentAssets' ];
-        $this->totalAssets            = $data[ 'totalAssets' ];
-        $this->totalLiabilities       = $data[ 'totalLiabilities' ];
-        $this->currentCash            = $data[ 'currentCash' ];
-        $this->currentDebt            = $data[ 'currentDebt' ];
-        $this->totalCash              = $data[ 'totalCash' ];
-        $this->totalDebt              = $data[ 'totalDebt' ];
-        $this->shareholderEquity      = $data[ 'shareholderEquity' ];
-        $this->cashChange             = $data[ 'cashChange' ];
-        $this->cashFlow               = $data[ 'cashFlow' ];
-        $this->operatingGainsLosses   = $data[ 'operatingGainsLosses' ];
+        $this->reportDate             = $data[ 'reportDate' ] ?? NULL;
+        $this->grossProfit            = $data[ 'grossProfit' ] ?? NULL;
+        $this->costOfRevenue          = $data[ 'costOfRevenue' ] ?? NULL;
+        $this->operatingRevenue       = $data[ 'operatingRevenue' ] ?? NULL;
+        $this->totalRevenue           = $data[ 'totalRevenue' ] ?? NULL;
+        $this->operatingIncome        = $data[ 'operatingIncome' ] ?? NULL;
+        $this->netIncome              = $data[ 'netIncome' ] ?? NULL;
+        $this->researchAndDevelopment = $data[ 'researchAndDevelopment' ] ?? NULL;
+        $this->operatingExpense       = $data[ 'operatingExpense' ] ?? NULL;
+        $this->currentAssets          = $data[ 'currentAssets' ] ?? NULL;
+        $this->totalAssets            = $data[ 'totalAssets' ] ?? NULL;
+        $this->totalLiabilities       = $data[ 'totalLiabilities' ] ?? NULL;
+        $this->currentCash            = $data[ 'currentCash' ] ?? NULL;
+        $this->currentDebt            = $data[ 'currentDebt' ] ?? NULL;
+        $this->totalCash              = $data[ 'totalCash' ] ?? NULL;
+        $this->totalDebt              = $data[ 'totalDebt' ] ?? NULL;
+        $this->shareholderEquity      = $data[ 'shareholderEquity' ] ?? NULL;
+        $this->cashChange             = $data[ 'cashChange' ] ?? NULL;
+        $this->cashFlow               = $data[ 'cashFlow' ] ?? NULL;
+        $this->operatingGainsLosses   = $data[ 'operatingGainsLosses' ] ?? NULL;
 
         $this->carbonReportDate = Carbon::createFromFormat( 'Y-m-d', $this->reportDate, 'EST' )->setTime( 0, 0, 0 );
     }

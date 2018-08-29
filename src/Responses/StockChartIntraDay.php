@@ -28,22 +28,22 @@ class StockChartIntraDay extends StockChartData {
 
     public function __construct( array $dataPoint ) {
         parent::__construct( $dataPoint );
-        $this->minute               = $dataPoint[ 'minute' ];
-        $this->average              = $dataPoint[ 'average' ];
-        $this->notional             = $dataPoint[ 'notional' ];
-        $this->numberOfTrades       = $dataPoint[ 'numberOfTrades' ];
-        $this->date                 = $dataPoint[ 'date' ];
-        $this->high                 = $dataPoint[ 'high' ];
-        $this->low                  = $dataPoint[ 'low' ];
-        $this->volume               = $dataPoint[ 'volume' ];
-        $this->marketHigh           = $dataPoint[ 'marketHigh' ];
-        $this->marketLow            = $dataPoint[ 'marketLow' ];
-        $this->marketAverage        = $dataPoint[ 'marketAverage' ];
-        $this->marketVolume         = $dataPoint[ 'marketVolume' ];
-        $this->marketNotional       = $dataPoint[ 'marketNotional' ];
-        $this->marketNumberOfTrades = $dataPoint[ 'marketNumberOfTrades' ];
-        $this->marketChangeOverTime = $dataPoint[ 'marketChangeOverTime' ];
-
+        $this->minute               = $dataPoint[ 'minute' ] ?? NULL;
+        $this->average              = $dataPoint[ 'average' ] ?? NULL;
+        $this->notional             = $dataPoint[ 'notional' ] ?? NULL;
+        $this->numberOfTrades       = $dataPoint[ 'numberOfTrades' ] ?? NULL;
+        $this->date                 = $dataPoint[ 'date' ] ?? NULL;
+        $this->high                 = $dataPoint[ 'high' ] ?? NULL;
+        $this->low                  = $dataPoint[ 'low' ] ?? NULL;
+        $this->volume               = $dataPoint[ 'volume' ] ?? NULL;
+        $this->marketHigh           = $dataPoint[ 'marketHigh' ] ?? NULL;
+        $this->marketLow            = $dataPoint[ 'marketLow' ] ?? NULL;
+        $this->marketAverage        = $dataPoint[ 'marketAverage' ] ?? NULL;
+        $this->marketVolume         = $dataPoint[ 'marketVolume' ] ?? NULL;
+        $this->marketNotional       = $dataPoint[ 'marketNotional' ] ?? NULL;
+        $this->marketNumberOfTrades = $dataPoint[ 'marketNumberOfTrades' ] ?? NULL;
+        $this->marketChangeOverTime = $dataPoint[ 'marketChangeOverTime' ] ?? NULL;
+        // TODO Check the code for the below property. Add defaults, and it doesn't smell right.
         $this->carbonDate = Carbon::createFromFormat( 'Ymd H:i', $dataPoint[ 'date' ] . ' ' . $dataPoint[ 'minute' ], 'EST' );
     }
 }

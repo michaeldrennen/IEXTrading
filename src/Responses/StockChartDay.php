@@ -21,17 +21,17 @@ class StockChartDay extends StockChartData {
 
     public function __construct( array $dataPoint ) {
         parent::__construct( $dataPoint );
-        $this->date             = $dataPoint[ 'date' ];
-        $this->open             = $dataPoint[ 'open' ];
-        $this->close            = $dataPoint[ 'close' ];
-        $this->unadjustedVolume = $dataPoint[ 'unadjustedVolume' ];
-        $this->change           = $dataPoint[ 'change' ];
-        $this->changePercent    = $dataPoint[ 'changePercent' ];
-        $this->vwap             = $dataPoint[ 'vwap' ];
-        $this->high             = $dataPoint[ 'high' ];
-        $this->low              = $dataPoint[ 'low' ];
-        $this->volume           = $dataPoint[ 'volume' ];
-        $this->label            = $dataPoint[ 'label' ];
-        $this->changeOverTime   = $dataPoint[ 'changeOverTime' ];
+        $this->date             = $dataPoint[ 'date' ] ?? NULL;
+        $this->open             = $dataPoint[ 'open' ] ?? NULL;
+        $this->close            = $dataPoint[ 'close' ] ?? NULL;
+        $this->unadjustedVolume = $dataPoint[ 'unadjustedVolume' ] ?? NULL;
+        $this->change           = $dataPoint[ 'change' ] ?? NULL;
+        $this->changePercent    = $dataPoint[ 'changePercent' ] ?? NULL;
+        $this->vwap             = $dataPoint[ 'vwap' ] ?? NULL;
+        $this->high             = $dataPoint[ 'high' ] ?? NULL;
+        $this->low              = $dataPoint[ 'low' ] ?? NULL;
+        $this->volume           = $dataPoint[ 'volume' ] ?? NULL;
+        $this->label            = $dataPoint[ 'label' ] ?? NULL;
+        $this->changeOverTime   = $dataPoint[ 'changeOverTime' ] ?? NULL;
     }
 }

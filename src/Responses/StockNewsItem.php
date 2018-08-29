@@ -13,12 +13,12 @@ class StockNewsItem {
 
 
     public function __construct( $a ) {
-        $this->datetime = $a[ 'datetime' ];
-        $this->headline = $a[ 'headline' ];
-        $this->source   = $a[ 'source' ];
-        $this->url      = $a[ 'url' ];
-        $this->summary  = $a[ 'summary' ];
-        $this->related  = $a[ 'related' ];
+        $this->datetime = $a[ 'datetime' ] ?? NULL;
+        $this->headline = $a[ 'headline' ] ?? NULL;
+        $this->source   = $a[ 'source' ] ?? NULL;
+        $this->url      = $a[ 'url' ] ?? NULL;
+        $this->summary  = $a[ 'summary' ] ?? NULL;
+        $this->related  = $a[ 'related' ] ?? NULL;
 
     }
 

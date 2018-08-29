@@ -8,8 +8,8 @@ class StockLogo extends IEXTradingResponse {
 
     public function __construct( $response ) {
         $jsonString = (string)$response->getBody();
-        $a          = \GuzzleHttp\json_decode( $jsonString, true );
-        $this->url  = $a[ 'url' ];
+        $a          = \GuzzleHttp\json_decode( $jsonString, TRUE );
+        $this->url  = $a[ 'url' ] ?? NULL;
     }
 
 }

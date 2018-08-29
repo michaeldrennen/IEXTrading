@@ -32,16 +32,16 @@ class StockCompany extends IEXTradingResponse {
      */
     public function __construct( $response ) {
         $jsonString        = (string)$response->getBody();
-        $a                 = \GuzzleHttp\json_decode( $jsonString, true );
-        $this->symbol      = $a[ 'symbol' ];
-        $this->companyName = $a[ 'companyName' ];
-        $this->exchange    = $a[ 'exchange' ];
-        $this->industry    = $a[ 'industry' ];
-        $this->website     = $a[ 'website' ];
-        $this->description = $a[ 'description' ];
-        $this->CEO         = $a[ 'CEO' ];
-        $this->issueType   = $a[ 'issueType' ];
-        $this->sector      = $a[ 'sector' ];
+        $a                 = \GuzzleHttp\json_decode( $jsonString, TRUE );
+        $this->symbol      = $a[ 'symbol' ] ?? NULL;
+        $this->companyName = $a[ 'companyName' ] ?? NULL;
+        $this->exchange    = $a[ 'exchange' ] ?? NULL;
+        $this->industry    = $a[ 'industry' ] ?? NULL;
+        $this->website     = $a[ 'website' ] ?? NULL;
+        $this->description = $a[ 'description' ] ?? NULL;
+        $this->CEO         = $a[ 'CEO' ] ?? NULL;
+        $this->issueType   = $a[ 'issueType' ] ?? NULL;
+        $this->sector      = $a[ 'sector' ] ?? NULL;
     }
 
 }

@@ -17,7 +17,6 @@ abstract class StockChartData {
      * @param array $dataPoint
      */
     public function __construct( $dataPoint ) {
-
         $this->high           = $dataPoint[ 'high' ] ?? NULL;
         $this->low            = $dataPoint[ 'low' ] ?? NULL;
         $this->volume         = $dataPoint[ 'volume' ] ?? NULL;
