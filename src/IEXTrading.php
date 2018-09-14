@@ -2,6 +2,7 @@
 
 namespace MichaelDrennen\IEXTrading;
 
+use Carbon\Carbon;
 use MichaelDrennen\IEXTrading\Exceptions\InvalidStockChartOption;
 use MichaelDrennen\IEXTrading\Exceptions\ItemCountPassedToStockNewsOutOfRange;
 use MichaelDrennen\IEXTrading\Exceptions\UnknownSymbol;
@@ -118,13 +119,14 @@ class IEXTrading {
      * @param string $ticker A valid stock ticker Ex: AAPL for Apple
      * @param string $option Valid values: 5y, 2y, 1y, ytd, 6m, 3m, 1m, 1d, date, and dynamic
      * @param string $date   Only used with the 'date' $option passed in. Expected format: yyyymmdd
-     *
-     * @return StockChart
+     * @return \MichaelDrennen\IEXTrading\Responses\StockChart
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \MichaelDrennen\IEXTrading\Exceptions\InvalidRangeReturnedInDynamicChart
      * @throws \MichaelDrennen\IEXTrading\Exceptions\InvalidStockChartOption
-     * @throws \Exception
+     * @throws \MichaelDrennen\IEXTrading\Exceptions\UnknownSymbol
      */
     public static function stockChart( string $ticker, string $option, string $date = NULL ): StockChart {
-        $uri = 'stock/' . $ticker . '/chart/' . $option;
+        $uri              = 'stock/' . $ticker . '/chart/' . $option;
 
         switch ( $option ):
             case '5y':
@@ -139,7 +141,7 @@ class IEXTrading {
                 $response = IEXTrading::makeRequest( 'GET', $uri );
                 break;
             case 'date':
-                $uri      .= '/' . $date;
+                $uri .= '/' . $date;
                 $response = IEXTrading::makeRequest( 'GET', $uri );
                 break;
             default:
@@ -153,8 +155,8 @@ class IEXTrading {
     /**
      * @param string $ticker
      * @return \MichaelDrennen\IEXTrading\Responses\StockFinancials
+     * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \MichaelDrennen\IEXTrading\Exceptions\UnknownSymbol
-     * @throws \Exception
      */
     public static function stockFinancials( string $ticker ): StockFinancials {
         $uri      = 'stock/' . $ticker . '/financials';
@@ -166,8 +168,8 @@ class IEXTrading {
     /**
      * @param string $ticker
      * @return \MichaelDrennen\IEXTrading\Responses\StockLogo
+     * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \MichaelDrennen\IEXTrading\Exceptions\UnknownSymbol
-     * @throws \Exception
      */
     public static function stockLogo( string $ticker ): StockLogo {
         $uri      = 'stock/' . $ticker . '/logo';
@@ -179,7 +181,7 @@ class IEXTrading {
     /**
      * @param string $ticker
      * @return float
-     * @throws \Exception
+     * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \MichaelDrennen\IEXTrading\Exceptions\UnknownSymbol
      */
     public static function stockPrice( string $ticker ): float {
@@ -189,6 +191,35 @@ class IEXTrading {
         $price      = \GuzzleHttp\json_decode( $jsonString, TRUE );
 
         return (float)$price;
+    }
+
+    /**
+     * Given a ticker and a date, this method will return the closing price.
+     * TODO Add code that determines how far back date is, and select a better date option for the stockChart method.
+     * No need to pull 5 years of pricing data if I don't have to.
+     * @param string         $ticker
+     * @param \Carbon\Carbon $date
+     * @return float
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \MichaelDrennen\IEXTrading\Exceptions\InvalidRangeReturnedInDynamicChart
+     * @throws \MichaelDrennen\IEXTrading\Exceptions\InvalidStockChartOption
+     * @throws \MichaelDrennen\IEXTrading\Exceptions\UnknownSymbol
+     */
+    public static function getClosingPriceByDate( string $ticker, Carbon $date ): float {
+        $stockChart = self::stockChart( $ticker, '5y', $date->toDateString() );
+        if ( empty( $stockChart->data ) ):
+            throw new \Exception( "IEXTrading couldn't find 5y stockChart data for " . $ticker );
+        endif;
+        $stockChartCollection = collect( $stockChart->data );
+        $dateString           = $date->toDateString();
+        $day                  = $stockChartCollection->filter( function ( $dayOfData ) use ( $dateString ) {
+            return $dateString == $dayOfData->date;
+        } );
+        if ( $day->isEmpty() ):
+            throw new \Exception( "Could not find a price on " . $dateString . " for " . $ticker );
+        endif;
+
+        return (float)$day->first()->close;
     }
 
 
@@ -208,7 +239,7 @@ class IEXTrading {
      * @param string $method
      * @param string $uri
      * @return \Psr\Http\Message\ResponseInterface
-     * @throws \Exception
+     * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \MichaelDrennen\IEXTrading\Exceptions\UnknownSymbol
      */
     protected static function makeRequest( string $method, string $uri ): ResponseInterface {

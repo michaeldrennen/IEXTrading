@@ -153,5 +153,16 @@ class IEXTradingTest extends TestCase {
         IEXTrading::stockChart( 'aapl', 'notValidOption' );
     }
 
+    /**
+     * @test
+     * @group price
+     */
+    public function testGetClosingPriceByDateWithTooEarlyDateShouldThrowException() {
+        $ticker       = 'AAPL';
+        $date         = \Carbon\Carbon::parse( '2001-10-01' );
+        $closingPrice = IEXTrading::getClosingPriceByDate( $ticker, $date );
+        var_dump( $closingPrice );
+    }
+
 
 }
