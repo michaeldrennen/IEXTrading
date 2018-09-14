@@ -119,8 +119,8 @@ class IEXTradingTest extends TestCase {
 
 
     /**
-     * @throws \MichaelDrennen\IEXTrading\Exceptions\InvalidStockChartOption
-     * @throws \Exception
+     * TODO Add code to determine WHEN this unit test is run. If you run it outside of MARKET HOURS, the data you get back will be different.
+     * @test
      * @group chart
      */
     public function testStockChartDynamic() {
@@ -158,10 +158,24 @@ class IEXTradingTest extends TestCase {
      * @group price
      */
     public function testGetClosingPriceByDateWithTooEarlyDateShouldThrowException() {
+        $this->expectException( Exception::class );
         $ticker       = 'AAPL';
         $date         = \Carbon\Carbon::parse( '2001-10-01' );
+        IEXTrading::getClosingPriceByDate( $ticker, $date );
+    }
+
+
+    /**
+     * TODO Add code that will intelligently pick the date to run this test on. (A business day) Because 5 years from
+     * now this test won't work. (IEXTrading doesn't return data points older than that.)
+     * @test
+     * @group price
+     */
+    public function testGetClosingPriceByDateWithValidDateShouldReturnPrice() {
+        $ticker       = 'AAPL';
+        $date         = \Carbon\Carbon::parse( '2018-09-13' );
         $closingPrice = IEXTrading::getClosingPriceByDate( $ticker, $date );
-        var_dump( $closingPrice );
+        $this->assertEquals( 226.41, $closingPrice );
     }
 
 
