@@ -152,6 +152,15 @@ class IEXTrading {
         return new StockChart( $response, $option, $date );
     }
 
+
+    // TODO Keep working on this. It will speed up a lot of what I do.
+    public static function stockCharts( array $tickers, string $option, string $date ): array {
+        $csvTickers = implode( ',', $tickers );
+        $uri        = 'stock/market/batch?symbols=' . $csvTickers . '&types=chart&range=' . $option;
+
+    }
+
+
     /**
      * @param string $ticker
      * @return \MichaelDrennen\IEXTrading\Responses\StockFinancials
