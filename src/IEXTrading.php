@@ -12,7 +12,6 @@ use MichaelDrennen\IEXTrading\Responses\StockFinancials;
 use MichaelDrennen\IEXTrading\Responses\StockLogo;
 use MichaelDrennen\IEXTrading\Responses\StockNews;
 use MichaelDrennen\IEXTrading\Responses\StockPeers;
-use MichaelDrennen\IEXTrading\Responses\StockPrice;
 use MichaelDrennen\IEXTrading\Responses\StockQuote;
 use MichaelDrennen\IEXTrading\Responses\StockRelevant;
 use MichaelDrennen\IEXTrading\Responses\StockStats;
