@@ -69,10 +69,10 @@ class StockChart extends IEXTradingResponse {
                 $this->range = $a[ 'range' ];
                 switch ( $this->range ):
                     case '1d':
+                    case '1m':
                         $stockChartObjectName = StockChartDay::class;
                         break;
                     case 'today':
-                    case '1m':
                         $stockChartObjectName = StockChartIntraDay::class;
                         break;
                     default:

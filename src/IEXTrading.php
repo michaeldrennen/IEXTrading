@@ -26,11 +26,10 @@ class IEXTrading {
     /**
      * @param string $ticker Use market to get market-wide news
      * @param int    $items  How many news items do you want? Number between 1 and 50. Default is 10
-     *
      * @return \MichaelDrennen\IEXTrading\Responses\StockNews
+     * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \MichaelDrennen\IEXTrading\Exceptions\ItemCountPassedToStockNewsOutOfRange
      * @throws \MichaelDrennen\IEXTrading\Exceptions\UnknownSymbol
-     * @throws \Exception
      */
     public static function stockNews( string $ticker = 'market', int $items = NULL ): StockNews {
         if ( isset( $items ) && ( $items < 1 || $items > 50 ) ):
