@@ -7,6 +7,7 @@ use MichaelDrennen\IEXTrading\Exceptions\InvalidStockChartOption;
 use MichaelDrennen\IEXTrading\Exceptions\ItemCountPassedToStockNewsOutOfRange;
 use MichaelDrennen\IEXTrading\Exceptions\UnknownSymbol;
 use MichaelDrennen\IEXTrading\Responses\StockChart;
+use MichaelDrennen\IEXTrading\Responses\StockChartDay;
 use MichaelDrennen\IEXTrading\Responses\StockCompany;
 use MichaelDrennen\IEXTrading\Responses\StockFinancials;
 use MichaelDrennen\IEXTrading\Responses\StockLogo;
@@ -228,6 +229,63 @@ class IEXTrading {
 
         return (float)$day->first()->close;
     }
+
+    /**
+     * @param string         $ticker
+     * @param \Carbon\Carbon $date
+     * @return float
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \MichaelDrennen\IEXTrading\Exceptions\InvalidRangeReturnedInDynamicChart
+     * @throws \MichaelDrennen\IEXTrading\Exceptions\InvalidStockChartOption
+     * @throws \MichaelDrennen\IEXTrading\Exceptions\UnknownSymbol
+     * @todo SEE ABOVE SISTER FUNCTION FOR TODO'S
+     */
+    public static function getOpeningPriceByDate( string $ticker, Carbon $date ): float {
+        $stockChart = self::stockChart( $ticker, '5y', $date->toDateString() );
+        if ( empty( $stockChart->data ) ):
+            throw new \Exception( "IEXTrading couldn't find 5y stockChart data for " . $ticker );
+        endif;
+        $stockChartCollection = collect( $stockChart->data );
+        $dateString           = $date->toDateString();
+        $day                  = $stockChartCollection->filter( function ( $dayOfData ) use ( $dateString ) {
+            return $dateString == $dayOfData->date;
+        } );
+        if ( $day->isEmpty() ):
+            throw new \Exception( "Could not find a price on " . $dateString . " for " . $ticker );
+        endif;
+
+        return (float)$day->first()->open;
+    }
+
+
+    /**
+     * @param string         $ticker
+     * @param \Carbon\Carbon $date
+     * @return \MichaelDrennen\IEXTrading\Responses\StockChartDay
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \MichaelDrennen\IEXTrading\Exceptions\InvalidRangeReturnedInDynamicChart
+     * @throws \MichaelDrennen\IEXTrading\Exceptions\InvalidStockChartOption
+     * @throws \MichaelDrennen\IEXTrading\Exceptions\UnknownSymbol
+     * @todo SEE ABOVE SISTER FUNCTIONS FOR TODO'S
+     */
+    public static function getStockChartDayByDate( string $ticker, Carbon $date ): StockChartDay {
+        $stockChart = self::stockChart( $ticker, '5y', $date->toDateString() );
+        if ( empty( $stockChart->data ) ):
+            throw new \Exception( "IEXTrading couldn't find 5y stockChart data for " . $ticker );
+        endif;
+        $stockChartCollection = collect( $stockChart->data );
+        $dateString           = $date->toDateString();
+        $day                  = $stockChartCollection->filter( function ( $dayOfData ) use ( $dateString ) {
+            return $dateString == $dayOfData->date;
+        } );
+        if ( $day->isEmpty() ):
+            throw new \Exception( "Could not find a price on " . $dateString . " for " . $ticker );
+        endif;
+
+        return $day->first();
+    }
+
+
 
 
     /**
